@@ -1,4 +1,4 @@
-const Paper = require("../models/paper");
+const Paper = require("../models/Paper");
 
 // UPLOAD PAPER
 const uploadPaper = async (req, res) => {
