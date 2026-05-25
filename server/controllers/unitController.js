@@ -1,4 +1,4 @@
-const Unit = require('../models/Unit')
+const Unit = require('../models/unit')
 
 // ADD UNIT
 const addUnit = async (req, res) => {

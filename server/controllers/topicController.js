@@ -1,4 +1,4 @@
-const Topic = require('../models/Topic')
+const Topic = require('../models/topic')
 
 // ADD TOPIC
 const addTopic = async (req, res) => {
