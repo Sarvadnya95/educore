@@ -1,3 +1,4 @@
+
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
@@ -11,28 +12,28 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-[#1E293B] border-b border-gray-700/50 px-6 py-4 flex justify-between items-center">
-      <h1
-        className="text-lg font-bold text-white cursor-pointer flex items-center gap-2"
+    <nav className="bg-white border-b border-gray-100 px-6 py-3 flex justify-between items-center shadow-sm">
+      <img
+        src="/logo.PNG"
+        alt="EduCore"
+        className="h-10 cursor-pointer"
         onClick={() => navigate(user?.role === 'admin' ? '/admin' : '/dashboard')}
-      >
-        🎓 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">EduCore</span>
-      </h1>
+      />
       <div className="flex items-center gap-4">
         {user?.role !== 'admin' && (
           <button
             onClick={() => navigate('/profile')}
-            className="text-sm text-gray-400 hover:text-white transition flex items-center gap-2"
+            className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#437FC7] transition"
           >
-            <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-8 h-8 bg-[#437FC7] rounded-full flex items-center justify-center text-white text-xs font-bold">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
-            {user?.name}
+            <span className="hidden md:block">{user?.name}</span>
           </button>
         )}
         <button
           onClick={handleLogout}
-          className="border border-gray-700 text-gray-400 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-800 transition"
+          className="border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium hover:border-[#437FC7] hover:text-[#437FC7] transition"
         >
           Logout
         </button>

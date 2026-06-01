@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { solveDoubt, generateQuiz, generateSummary } from '../services/api'
+import { FaTimes, FaQuestionCircle, FaClipboardList, FaFileAlt, FaRobot } from 'react-icons/fa'
 
 const AIPanel = ({ onClose, subject, unit, topic }) => {
   const [activeTab, setActiveTab] = useState('doubt')
@@ -53,37 +54,43 @@ const AIPanel = ({ onClose, subject, unit, topic }) => {
     return quiz.filter((q, i) => selected[i] === q.correct).length
   }
 
-  const tabs = ['doubt', 'quiz', 'summary']
+  const tabs = [
+    { id: 'doubt', label: 'Doubt', icon: <FaQuestionCircle /> },
+    { id: 'quiz', label: 'Quiz', icon: <FaClipboardList /> },
+    { id: 'summary', label: 'Summary', icon: <FaFileAlt /> }
+  ]
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
-      {/* Overlay */}
-      <div className="flex-1 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+      <div className="flex-1 bg-black/30 backdrop-blur-sm" onClick={onClose} />
+      <div className="w-full max-w-md bg-white border-l border-gray-100 flex flex-col h-full shadow-2xl">
 
-      {/* Panel */}
-      <div className="w-full max-w-md bg-[#1E293B] border-l border-gray-700/50 flex flex-col h-full">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-gray-700/50 flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
           <div>
-            <h2 className="text-white font-semibold">🤖 AI Assistant</h2>
-            <p className="text-gray-500 text-xs mt-0.5">{topic || subject || 'Select a topic'}</p>
+            <h2 className="text-[#1A1A2E] font-semibold flex items-center gap-2">
+              <FaRobot className="text-[#437FC7]" /> AI Assistant
+            </h2>
+            <p className="text-gray-400 text-xs mt-0.5">{topic || subject || 'Select a topic'}</p>
           </div>
-          <button onClick={onClose} className="text-gray-500 hover:text-white transition text-xl">✕</button>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition">
+            <FaTimes />
+          </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-700/50">
+        <div className="flex border-b border-gray-100">
           {tabs.map((tab) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex-1 py-3 text-sm font-medium capitalize transition ${
-                activeTab === tab
-                  ? 'text-indigo-400 border-b-2 border-indigo-400'
-                  : 'text-gray-500 hover:text-gray-300'
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 py-3 text-sm font-medium transition flex items-center justify-center gap-2 ${
+                activeTab === tab.id
+                  ? 'text-[#437FC7] border-b-2 border-[#437FC7]'
+                  : 'text-gray-400 hover:text-gray-600'
               }`}
             >
-              {tab === 'doubt' ? '💬 Doubt' : tab === 'quiz' ? '📊 Quiz' : '📝 Summary'}
+              {tab.icon} {tab.label}
             </button>
           ))}
         </div>
@@ -99,17 +106,17 @@ const AIPanel = ({ onClose, subject, unit, topic }) => {
                 onChange={(e) => setDoubt(e.target.value)}
                 placeholder="Type your doubt here..."
                 rows={3}
-                className="w-full bg-[#0F172A] border border-gray-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-600 resize-none"
+                className="w-full border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#437FC7] placeholder-gray-400 resize-none"
               />
               <button
                 onClick={handleDoubt}
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition disabled:opacity-50"
+                className="w-full bg-[#437FC7] text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-[#3a6fb0] transition disabled:opacity-50"
               >
                 {loading ? 'Thinking...' : 'Ask AI →'}
               </button>
               {answer && (
-                <div className="bg-[#0F172A] border border-gray-700/50 rounded-xl p-4 text-gray-300 text-sm whitespace-pre-wrap">
+                <div className="bg-[#F8FAFF] border border-gray-100 rounded-xl p-4 text-gray-700 text-sm whitespace-pre-wrap">
                   {answer}
                 </div>
               )}
@@ -122,14 +129,14 @@ const AIPanel = ({ onClose, subject, unit, topic }) => {
               <button
                 onClick={handleQuiz}
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition disabled:opacity-50"
+                className="w-full bg-[#437FC7] text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-[#3a6fb0] transition disabled:opacity-50"
               >
-                {loading ? 'Generating Quiz...' : '⚡ Generate Quiz'}
+                {loading ? 'Generating Quiz...' : 'Generate Quiz'}
               </button>
 
               {quiz.map((q, i) => (
-                <div key={i} className="bg-[#0F172A] border border-gray-700/50 rounded-xl p-4">
-                  <p className="text-white text-sm font-medium mb-3">{i + 1}. {q.question}</p>
+                <div key={i} className="bg-[#F8FAFF] border border-gray-100 rounded-xl p-4">
+                  <p className="text-[#1A1A2E] text-sm font-medium mb-3">{i + 1}. {q.question}</p>
                   <div className="space-y-2">
                     {q.options.map((opt, j) => (
                       <button
@@ -138,13 +145,13 @@ const AIPanel = ({ onClose, subject, unit, topic }) => {
                         className={`w-full text-left px-3 py-2 rounded-lg text-sm transition border ${
                           submitted
                             ? j === q.correct
-                              ? 'bg-green-500/10 border-green-500/30 text-green-400'
+                              ? 'bg-green-50 border-green-200 text-green-600'
                               : selected[i] === j
-                              ? 'bg-red-500/10 border-red-500/30 text-red-400'
-                              : 'border-gray-700 text-gray-500'
+                              ? 'bg-red-50 border-red-200 text-red-500'
+                              : 'border-gray-100 text-gray-400'
                             : selected[i] === j
-                            ? 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400'
-                            : 'border-gray-700 text-gray-400 hover:border-gray-500'
+                            ? 'bg-blue-50 border-[#437FC7] text-[#437FC7]'
+                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
                         }`}
                       >
                         {opt}
@@ -157,15 +164,15 @@ const AIPanel = ({ onClose, subject, unit, topic }) => {
               {quiz.length > 0 && !submitted && (
                 <button
                   onClick={() => setSubmitted(true)}
-                  className="w-full bg-violet-600 text-white py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition"
+                  className="w-full bg-[#437FC7] text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-[#3a6fb0] transition"
                 >
                   Submit Answers
                 </button>
               )}
 
               {submitted && (
-                <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
-                  <p className="text-indigo-400 font-semibold text-lg">
+                <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
+                  <p className="text-[#437FC7] font-semibold text-lg">
                     Score: {getScore()} / {quiz.length}
                   </p>
                 </div>
@@ -179,12 +186,12 @@ const AIPanel = ({ onClose, subject, unit, topic }) => {
               <button
                 onClick={handleSummary}
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition disabled:opacity-50"
+                className="w-full bg-[#437FC7] text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-[#3a6fb0] transition disabled:opacity-50"
               >
-                {loading ? 'Generating Summary...' : '📝 Generate Summary'}
+                {loading ? 'Generating Summary...' : 'Generate Summary'}
               </button>
               {summary && (
-                <div className="bg-[#0F172A] border border-gray-700/50 rounded-xl p-4 text-gray-300 text-sm whitespace-pre-wrap">
+                <div className="bg-[#F8FAFF] border border-gray-100 rounded-xl p-4 text-gray-700 text-sm whitespace-pre-wrap">
                   {summary}
                 </div>
               )}

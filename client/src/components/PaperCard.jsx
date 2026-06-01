@@ -4,20 +4,17 @@ const PaperCard = ({ paper }) => {
   }
 
   return (
-    <div className="flex items-center justify-between bg-[#0F172A] border border-gray-700/50 rounded-xl px-4 py-3">
+    <div className="flex items-center justify-between bg-[#F8FAFF] border border-gray-100 rounded-xl px-4 py-3">
       <div>
-        <p className="text-white text-sm font-medium">
-          Exam {paper.examYear}
-        </p>
-        <p className="text-gray-500 text-xs">
-          Semester {paper.semester}
-        </p>
+        <p className="text-[#1A1A2E] text-sm font-medium">Exam {paper.examYear}</p>
+        <p className="text-gray-400 text-xs">Semester {paper.semester}</p>
       </div>
       <a
         href={getViewableUrl(paper.fileUrl)}
         target="_blank"
         rel="noreferrer"
-        className="bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 px-4 py-2 rounded-lg text-xs font-medium hover:bg-indigo-600 hover:text-white transition">
+        className="bg-[#437FC7] text-white px-4 py-2 rounded-lg text-xs font-medium hover:bg-[#3a6fb0] transition"
+      >
         Download PDF
       </a>
     </div>
