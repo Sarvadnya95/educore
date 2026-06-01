@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../services/api'
 import { useAuth } from '../context/AuthContext'
+import { Eye, EyeOff } from 'lucide-react'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -9,6 +10,7 @@ const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -35,14 +37,18 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0F172A] flex items-center justify-center relative overflow-hidden">
+    
+    <div
+  className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: "url('/Gemini_Generated_Image_kaw5gbkaw5gbkaw5.png')" }}
+>
       <div className="absolute top-20 left-1/4 w-96 h-96 bg-indigo-600 opacity-10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-violet-600 opacity-10 rounded-full blur-3xl"></div>
 
-      <div className="bg-[#1E293B] border border-gray-700/50 p-8 rounded-2xl shadow-2xl w-full max-w-md z-10">
+      <div className="bg-[#fff] border border-gray-700/50 p-8 rounded-2xl shadow-2xl w-full max-w-md z-10">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white mb-1">🎓 EduCore</h1>
-          <p className="text-gray-400 text-sm">Welcome back! Login to continue</p>
+          <img src="/logo.PNG" alt="EduCore" className="h-12 mx-auto" />
+          <p className="text-gray-500 text-sm">Welcome back! Login to continue</p>
         </div>
 
         {error && (
@@ -53,7 +59,7 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1">Email</label>
             <input
               type="email"
               name="email"
@@ -61,11 +67,11 @@ const Login = () => {
               onChange={handleChange}
               placeholder="you@example.com"
               required
-              className="w-full bg-[#0F172A] border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-600"
+              className="w-full bg-[#F0F7FF] border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-600"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1">Password</label>
             <input
               type="password"
               name="password"
@@ -73,7 +79,7 @@ const Login = () => {
               onChange={handleChange}
               placeholder="••••••••"
               required
-              className="w-full bg-[#0F172A] border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-600"
+              className="w-full bg-[#F0F7FF] border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-600"
             />
           </div>
           <button
