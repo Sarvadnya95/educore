@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { addSubject, getSubjects, deleteSubject } = require('../controllers/subjectController')
+const { addSubject, getSubjects, deleteSubject, globalSearch } = require('../controllers/subjectController')
 const authMiddleware = require('../middleware/authMiddleware')
 const adminMiddleware = require('../middleware/adminMiddleware')
+
+// Search — must be before /:id routes
+router.get('/search', authMiddleware, globalSearch)
 
 // Admin only
 router.post('/', authMiddleware, adminMiddleware, addSubject)

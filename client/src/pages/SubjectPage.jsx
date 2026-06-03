@@ -89,7 +89,7 @@ const SubjectPage = () => {
         onClick={() => setAiOpen(true)}
         className="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-indigo-500/30 hover:opacity-90 transition flex items-center gap-2"
       >
-        🤖 AI Assistant
+       AI 
       </button>
 
       {/* AI Panel */}

@@ -40,3 +40,6 @@ export const deletePaper = (id) => API.delete(`/papers/${id}`)
 export const solveDoubt = (data) => API.post('/ai/doubt', data)
 export const generateQuiz = (data) => API.post('/ai/quiz', data)
 export const generateSummary = (data) => API.post('/ai/summary', data)
+
+export const searchContent = (query, year, semester) => 
+  API.get(`/subjects/search?query=${query}&year=${year}&semester=${semester}`)
