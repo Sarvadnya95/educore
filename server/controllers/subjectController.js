@@ -43,28 +43,20 @@ const globalSearch = async (req, res) => {
   try {
     if (!query) return res.json([])
 
-    const Subject = require('../models/Subject')
-    const Unit = require('../models/Unit')
-    const Topic = require('../models/Topic')
-
-    // Search subjects
     const subjects = await Subject.find({
       year,
       semester,
       name: { $regex: query, $options: 'i' }
     })
 
-    // Search units
     const units = await Unit.find({
       name: { $regex: query, $options: 'i' }
     }).populate('subjectId')
 
-    // Filter units by year/sem
     const filteredUnits = units.filter(u =>
       u.subjectId?.year == year && u.subjectId?.semester == semester
     )
 
-    // Search topics
     const topics = await Topic.find({
       title: { $regex: query, $options: 'i' }
     }).populate({
@@ -72,13 +64,11 @@ const globalSearch = async (req, res) => {
       populate: { path: 'subjectId' }
     })
 
-    // Filter topics by year/sem
     const filteredTopics = topics.filter(t =>
       t.unitId?.subjectId?.year == year &&
       t.unitId?.subjectId?.semester == semester
     )
 
-    // Build results
     const results = [
       ...subjects.map(s => ({
         type: 'subject',
