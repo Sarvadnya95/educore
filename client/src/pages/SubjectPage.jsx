@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { getUnits, getTopics, getPapers } from '../services/api'
+import { useParams, useNavigate } from 'react-router-dom'
+import { getUnits, getPapers } from '../services/api'
 import Navbar from '../components/Navbar'
 import UnitAccordion from '../components/UnitAccordion'
 import PaperCard from '../components/PaperCard'
 import AIPanel from '../components/AIPanel'
+import { FaArrowLeft, FaRobot } from 'react-icons/fa'
 
 const SubjectPage = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [units, setUnits] = useState([])
   const [papers, setPapers] = useState([])
   const [loading, setLoading] = useState(true)
   const [subjectName, setSubjectName] = useState('')
+  const [subjectDesc, setSubjectDesc] = useState('')
   const [aiOpen, setAiOpen] = useState(false)
   const [currentTopic, setCurrentTopic] = useState(null)
   const [currentUnit, setCurrentUnit] = useState(null)
@@ -23,6 +26,7 @@ const SubjectPage = () => {
         setUnits(unitsRes.data)
         if (unitsRes.data.length > 0) {
           setSubjectName(unitsRes.data[0].subjectId?.name || 'Subject')
+          setSubjectDesc(unitsRes.data[0].subjectId?.description || '')
         }
         const papersRes = await getPapers(id)
         setPapers(papersRes.data)
@@ -35,24 +39,31 @@ const SubjectPage = () => {
   }, [id])
 
   return (
-    <div className="min-h-screen bg-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFF]">
       <Navbar />
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-6 pb-24">
+
         {/* Header */}
-        <div className="mb-8">
-          <p className="text-gray-500 text-sm mb-1">Dashboard → Subject</p>
-          <h1 className="text-3xl font-bold text-white">{subjectName || 'Subject'}</h1>
+        <div className="mb-6">
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="flex items-center gap-2 text-gray-400 hover:text-[#437FC7] transition text-sm mb-4"
+          >
+            <FaArrowLeft /> Back to Dashboard
+          </button>
+          <h1 className="text-xl md:text-2xl font-bold text-[#1A1A2E]">{subjectName || 'Subject'}</h1>
+          {subjectDesc && <p className="text-gray-400 text-sm mt-1">{subjectDesc}</p>}
         </div>
 
         {loading ? (
-          <p className="text-gray-500 text-center mt-20">Loading...</p>
+          <p className="text-gray-400 text-center mt-20">Loading...</p>
         ) : (
           <>
-            {/* Units Accordion */}
-            <div className="space-y-3 mb-10">
+            {/* Units */}
+            <div className="space-y-3 mb-8">
               {units.length === 0 ? (
-                <div className="bg-[#1E293B] border border-gray-700/50 rounded-2xl p-10 text-center">
+                <div className="bg-white border border-gray-100 rounded-2xl p-10 text-center shadow-sm">
                   <p className="text-gray-400">No units found for this subject.</p>
                 </div>
               ) : (
@@ -69,10 +80,10 @@ const SubjectPage = () => {
               )}
             </div>
 
-            {/* Previous Year Papers */}
+            {/* Papers */}
             {papers.length > 0 && (
-              <div className="bg-[#1E293B] border border-gray-700/50 rounded-2xl p-6">
-                <h2 className="text-white font-semibold text-lg mb-4">📄 Previous Year Papers</h2>
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+                <h2 className="text-[#1A1A2E] font-semibold text-lg mb-4">Previous Year Papers</h2>
                 <div className="grid gap-3">
                   {papers.map((paper) => (
                     <PaperCard key={paper._id} paper={paper} />
@@ -84,12 +95,12 @@ const SubjectPage = () => {
         )}
       </div>
 
-      {/* AI Floating Button */}
+      {/* AI Button — fixed bottom right always visible */}
       <button
         onClick={() => setAiOpen(true)}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-3 rounded-2xl font-semibold shadow-lg shadow-indigo-500/30 hover:opacity-90 transition flex items-center gap-2"
+        className="fixed bottom-5 right-4 z-40 bg-[#437FC7] text-white px-4 py-3 rounded-2xl font-semibold shadow-lg shadow-blue-200 hover:bg-[#3a6fb0] transition flex items-center gap-2 text-sm"
       >
-       AI 
+        <FaRobot /> AI
       </button>
 
       {/* AI Panel */}

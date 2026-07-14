@@ -38,7 +38,6 @@ const Navbar = () => {
     return () => clearTimeout(delaySearch)
   }, [query])
 
-  // Close on outside click
   useEffect(() => {
     const handleClick = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
@@ -68,30 +67,30 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-4 shadow-sm">
+    <nav className="bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-3 shadow-sm">
 
       {/* Logo */}
       <img
         src="/logo.PNG"
         alt="EduCore"
-        className="h-10 cursor-pointer flex-shrink-0"
+        className="h-9 cursor-pointer flex-shrink-0"
         onClick={() => navigate(user?.role === 'admin' ? '/admin' : '/dashboard')}
       />
 
       {/* Search Bar — only for students */}
       {user?.role !== 'admin' && (
-        <div className="flex-1 relative max-w-lg" ref={searchRef}>
-          <div className="flex items-center bg-[#F8FAFF] border border-gray-200 rounded-xl px-3 py-2 focus-within:border-[#437FC7] focus-within:ring-2 focus-within:ring-blue-100 transition">
+        <div className="flex-1 relative min-w-0" ref={searchRef}>
+          <div className="flex items-center bg-[#F8FAFF] border border-gray-200 rounded-xl px-3 py-2 focus-within:border-[#437FC7] transition w-full">
             <FaSearch className="text-gray-400 mr-2 text-sm flex-shrink-0" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search topics, units, subjects..."
-              className="flex-1 text-gray-800 text-sm focus:outline-none placeholder-gray-400 bg-transparent"
+              placeholder="Search topics..."
+              className="flex-1 text-gray-800 text-sm focus:outline-none placeholder-gray-400 bg-transparent min-w-0"
             />
             {query && (
-              <button onClick={() => { setQuery(''); setShowResults(false) }}>
+              <button onClick={() => { setQuery(''); setShowResults(false) }} className="flex-shrink-0">
                 <FaTimes className="text-gray-400 hover:text-gray-600 text-sm" />
               </button>
             )}
@@ -105,7 +104,7 @@ const Navbar = () => {
               ) : results.length === 0 ? (
                 <div className="p-4 text-center text-gray-400 text-sm">No results for "{query}"</div>
               ) : (
-                <div className="max-h-80 overflow-y-auto">
+                <div className="max-h-72 overflow-y-auto">
                   {results.map((result, index) => (
                     <div
                       key={index}
@@ -132,21 +131,18 @@ const Navbar = () => {
       )}
 
       {/* Right Side */}
-      <div className="flex items-center gap-3 ml-auto">
+      <div className="flex items-center gap-2 flex-shrink-0">
         {user?.role !== 'admin' && (
           <button
             onClick={() => navigate('/profile')}
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#437FC7] transition"
+            className="w-8 h-8 bg-[#437FC7] rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
           >
-            <div className="w-8 h-8 bg-[#437FC7] rounded-full flex items-center justify-center text-white text-xs font-bold">
-              {user?.name?.charAt(0).toUpperCase()}
-            </div>
-            <span className="hidden md:block">{user?.name}</span>
+            {user?.name?.charAt(0).toUpperCase()}
           </button>
         )}
         <button
           onClick={handleLogout}
-          className="border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium hover:border-[#437FC7] hover:text-[#437FC7] transition"
+          className="border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-xs font-medium hover:border-[#437FC7] hover:text-[#437FC7] transition flex-shrink-0"
         >
           Logout
         </button>
