@@ -227,15 +227,10 @@ Register on the platform → go to MongoDB → find your user → change `role` 
 **Sarvadnya** — BCA Student, Sant Gadge Baba Amravati University  
 Google Student Ambassador 2026 | Tech Content Creator | Full Stack Developer
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com)
-[![Instagram](https://img.shields.io/badge/Instagram-Follow-pink?style=flat&logo=instagram)](https://instagram.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/sarvadnya-tidke-aa4a74330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+
 
 ---
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
 
 <p align="center">Built with ❤️ for college students — by a college student</p>
