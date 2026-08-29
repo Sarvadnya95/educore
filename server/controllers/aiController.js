@@ -7,7 +7,7 @@ const solveDoubt = async (req, res) => {
   const { subject, unit, topic, doubt } = req.body;
   try {
     const response = await groq.chat.completions.create({
-     model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+     model: 'openai/gpt-oss-20b',
       messages: [
         {
           role: "user",
@@ -29,7 +29,7 @@ const generateQuiz = async (req, res) => {
   const { subject, unit, topics } = req.body;
   try {
     const response = await groq.chat.completions.create({
-      model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+      model: 'openai/gpt-oss-20b',
       messages: [
         {
           role: "user",
@@ -63,7 +63,7 @@ const generateSummary = async (req, res) => {
   const { subject, topic } = req.body;
   try {
     const response = await groq.chat.completions.create({
-     model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+     model: 'openai/gpt-oss-20b',
       messages: [
         {
           role: "user",
