@@ -24,4 +24,6 @@ const topicSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
+topicSchema.index({ unitId: 1, order: 1 })
+
 module.exports = mongoose.model('Topic', topicSchema)

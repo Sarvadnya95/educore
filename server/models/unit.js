@@ -16,4 +16,5 @@ const unitSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
+unitSchema.index({ subjectId: 1, order: 1 })
 module.exports = mongoose.model('Unit', unitSchema)
