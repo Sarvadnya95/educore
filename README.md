@@ -12,7 +12,7 @@
 
 ## 📌 Problem Statement
 
-College students often miss lectures and have no consistent way to access their syllabus or study materials. There is no single platform where students can find topic-wise video lectures, notes, and previous year papers for their specific semester — for free.
+College students often miss lectures and have no consistent way to access their syllabus or study materials. There is no single platform where students can find topic-wise video lectures, notes, and previous year papers for their specific semester -for free.
 
 **EduCore solves this.**
 
@@ -21,28 +21,28 @@ College students often miss lectures and have no consistent way to access their 
 ## ✨ Features
 
 ### 👨‍🎓 For Students
-- 🔐 **Secure Authentication** — Register, login with JWT-based auth
-- 📚 **Year & Semester Based Dashboard** — See only your relevant subjects
-- 📖 **Syllabus Accordion** — Navigate subjects → units → topics cleanly
-- 🎥 **YouTube Video Lectures** — Watch embedded videos per topic
-- 📄 **Previous Year Papers** — Download PDFs instantly
-- 🔍 **Global Search** — Search any topic, unit or subject instantly
-- 👤 **Profile Management** — Change year/semester anytime
+- 🔐 **Secure Authentication** - Register, login with JWT-based auth
+- 📚 **Year & Semester Based Dashboard** - See only your relevant subjects
+- 📖 **Syllabus Accordion** - Navigate subjects → units → topics cleanly
+- 🎥 **YouTube Video Lectures** - Watch embedded videos per topic
+- 📄 **Previous Year Papers** - Download PDFs instantly
+- 🔍 **Global Search** - Search any topic, unit or subject instantly
+- 👤 **Profile Management** - Change year/semester anytime
 
-### 🤖 AI Features (Powered by Groq — LLaMA 3)
-- 💬 **AI Doubt Solver** — Ask any doubt, get instant answers in context
-- 📊 **AI Quiz Generator** — Generate 5 MCQs on any topic instantly
-- 📝 **AI Topic Summary** — Get structured notes for any topic in one click
+### 🤖 AI Features (Powered by Groq - LLaMA 3)
+- 💬 **AI Doubt Solver** - Ask any doubt, get instant answers in context
+- 📊 **AI Quiz Generator** - Generate 5 MCQs on any topic instantly
+- 📝 **AI Topic Summary** - Get structured notes for any topic in one click
 
 ### 🔧 For Admin
-- ➕ **Manage Subjects** — Add/delete subjects by year & semester
-- 📂 **Manage Units** — Add units inside subjects
-- 🎬 **Manage Topics** — Add topics with YouTube links
-- 📎 **Upload Papers** — Upload previous year PDFs via Cloudinary
+- ➕ **Manage Subjects** - Add/delete subjects by year & semester
+- 📂 **Manage Units** - Add units inside subjects
+- 🎬 **Manage Topics** - Add topics with YouTube links
+- 📎 **Upload Papers** - Upload previous year PDFs via Cloudinary
 
 ### 📱 Progressive Web App (PWA)
 - Install EduCore on your phone like a native app
-- Works on Android & iOS — no Play Store needed
+- Works on Android & iOS - no Play Store needed
 - Offline support for visited pages
 
 ---
@@ -220,18 +220,18 @@ Register on the platform → go to MongoDB → find your user → change `role` 
 
 ## 🎯 Upcoming Features
 
-- [ ] Progress Tracker — Mark topics as done
-- [ ] AI Study Planner — Day by day exam preparation plan
-- [ ] Gamification — Points, streaks and leaderboard
-- [ ] AI Notes Generator — Auto generate notes per topic
-- [ ] Bulk Syllabus Import — Upload via Excel/CSV
+- [ ] Progress Tracker - Mark topics as done
+- [ ] AI Study Planner - Day by day exam preparation plan
+- [ ] Gamification - Points, streaks and leaderboard
+- [ ] AI Notes Generator - Auto generate notes per topic
+- [ ] Bulk Syllabus Import - Upload via Excel/CSV
 - [ ] Analytics Dashboard for Admin
 
 ---
 
 ## 👨‍💻 Developer
 
-**Sarvadnya** — BCA Student, Sant Gadge Baba Amravati University  
+**Sarvadnya** - BCA Student, Sant Gadge Baba Amravati University  
 Google Student Ambassador 2026 | Tech Content Creator | Full Stack Developer
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/sarvadnya-tidke-aa4a74330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
@@ -240,4 +240,4 @@ Google Student Ambassador 2026 | Tech Content Creator | Full Stack Developer
 ---
 
 
-<p align="center">Built with ❤️ for college students — by a college student</p>
+<p align="center">Built with ❤️ for college students - by a college student</p>
