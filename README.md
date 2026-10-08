@@ -6,7 +6,6 @@
 
 ## 🌐 Links & Deployment
 * **Live Frontend (Vercel):** [https://educore-brown-six.vercel.app/](https://educore-brown-six.vercel.app/)
-* **Backend API (Render):** *(Agar aap backend ki link bhi dena chahte hain toh yahan daal sakte hain)*
 
 > **Free, AI-powered syllabus platform for college students**  
 > Access your complete syllabus, video lectures, AI assistance, and previous year papers — anytime, anywhere.
