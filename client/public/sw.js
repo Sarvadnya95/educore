@@ -1,50 +1,46 @@
-const CACHE_NAME = "educore-v2";
-const urlsToCache = ["/", "/index.html", "/logo.PNG"];
+const CACHE_NAME = 'educore-v3'
+const urlsToCache = ['/logo.PNG']
 
-// Install
-self.addEventListener("install", (event) => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    Promise.all([
-      caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)),
-      self.skipWaiting(),
-    ]),
-  );
-});
-
-// Fetch
-self.addEventListener("fetch", (event) => {
-  if (
-    event.request.method !== "GET" ||
-    new URL(event.request.url).origin !== self.location.origin
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   )
-    return;
+  self.skipWaiting()
+})
 
-  if (event.request.mode === "navigate") {
-    event.respondWith(
-      fetch(event.request).catch(() => caches.match("/index.html")),
-    );
-    return;
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames.map((name) => {
+          if (name !== CACHE_NAME) return caches.delete(name)
+        })
+      )
+    ).then(() => self.clients.claim())
+  )
+})
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return
+
+  const url = new URL(event.request.url)
+
+  // Always fetch fresh from network for HTML pages — never cache
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('.html')) {
+    event.respondWith(fetch(event.request))
+    return
   }
 
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) return response;
-      return fetch(event.request);
-    }),
-  );
-});
-
-// Activate
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        }),
-      ).then(() => self.clients.claim());
-    }),
-  );
-});
+  // For assets — cache first
+  if (url.origin === self.location.origin) {
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        return cached || fetch(event.request).then((response) => {
+          const clone = response.clone()
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone))
+          return response
+        })
+      })
+    )
+  }
+})
